@@ -14,7 +14,7 @@ behavior Main() {
 	int main(int argc, char *argv[]) {
 		infilename = argv[1];
 		
-		par { stim; plat; mon};
+		par { stim; plat; mon; };
 		return 0;
 	}
 };

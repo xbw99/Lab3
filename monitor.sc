@@ -1,16 +1,19 @@
-import "image_queue";
 #include <stdio.h>
+#include <string.h>
+import "image_queue";
 
-behavior Platform(i_image_receiver ch) {
+
+behavior Monitor(i_image_receiver ch) {
 	img IMAGE;
 	int cols, rows;
 	char *outfilename;
 	char *comment;
-	unsigend char* image;
+	unsigned char* image;
 	int maxval;
+	FILE *fp;
 	void main(void) {
 		ch.receive(&IMAGE);
-		FILE *fp;
+		
 		outfilename = (char*)"ba.pgm";
 		comment = (char*)"";
 		maxval = 255;
@@ -33,7 +36,7 @@ behavior Platform(i_image_receiver ch) {
 		fprintf(fp, "%d\n", maxval);
 
 	
-		if (rows != fwrite(image, cols, rows, fp)) {
+		if ((unsigned)rows != fwrite(image, cols, rows, fp)) {
 			fprintf(stderr, "Error writing the image data in write_pgm_image().\n");
 			if (fp != stdout) fclose(fp);
 			return;
