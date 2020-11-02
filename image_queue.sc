@@ -7,4 +7,4 @@
 #define SIZE ROWS * COLS
 
 typedef unsigned char img[SIZE];
-#DEFINE_IC_TYPED_QUEUE(image, img)
+DEFINE_IC_TYPED_QUEUE(image, img)
