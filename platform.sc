@@ -41,13 +41,22 @@ behavior DataOut(c_image_receiver ch1, c_image_sender ch2) {
 		}
 };
 
+behavior DUT(c_image_receiver ch1, c_image_sender ch2) {
+	img IMAGE;
+	void main(void) {
+		ch1.receive(&IMAGE);
+		ch2.send(IMAGE);
+	}
+};
+
 behavior Platform(c_image_receiver toPlatform, c_image_sender outPlatform) {
 	c_image_queue inDut(2ul);
 	c_image_queue outDut(2ul);
 	DataIn din(toPlatform, inDut);
+	DUT canny(inDut, outDut);
 	DataOut dout(outDut, outPlatform);
 	
 	void main(void) {
-		par( din; dout; };
+		par( din; canny; dout; };
 	}	
 };
