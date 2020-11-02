@@ -1,6 +1,7 @@
 import "image_queue";
 import "stimulus";
 import "platform";
+import "monitor";
 
 behavior Main() {
 	c_image_queue toPlatform(2ul);
